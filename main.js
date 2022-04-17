@@ -6,32 +6,41 @@ const list = document.querySelector(".ajax-section .cities");
 
 const apiKey = "0689f4a45efee7e365572738d2807365";
 
-form.addEventListener("submit", e => {
+form.addEventListener("submit", e => 
+{
   e.preventDefault();
   let inputVal = input.value;
 
   const listItems = list.querySelectorAll(".ajax-section .city");
   const listItemsArray = Array.from(listItems);
 
-  if (listItemsArray.length > 0) {
-    const filteredArray = listItemsArray.filter(el => {
+  if (listItemsArray.length > 0) 
+  {
+    const filteredArray = listItemsArray.filter(el =>
+       {
       let content = "";
-      if (inputVal.includes(",")) {
-        if (inputVal.split(",")[1].length > 2) {
+      if (inputVal.includes(",")) 
+      {
+        if (inputVal.split(",")[1].length > 2) 
+        {
           inputVal = inputVal.split(",")[0];
           content = el
             .querySelector(".city-name span")
             .textContent.toLowerCase();
-        } else {
+        } else 
+        {
           content = el.querySelector(".city-name").dataset.name.toLowerCase();
         }
-      } else {
+      } 
+      else 
+      {
         content = el.querySelector(".city-name span").textContent.toLowerCase();
       }
       return content == inputVal.toLowerCase();
     });
 
-    if (filteredArray.length > 0) {
+    if (filteredArray.length > 0) 
+    {
       msg.textContent = `You already know the weather for ${
         filteredArray[0].querySelector(".city-name span").textContent
       } ...otherwise be more specific by providing the country code as well 😉`;
@@ -45,7 +54,8 @@ form.addEventListener("submit", e => {
 
   fetch(url)
     .then(response => response.json())
-    .then(data => {
+    .then(data => 
+      {
       const { main, name, sys, weather } = data;
       const icon = `https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/${
         weather[0]["icon"]
@@ -69,7 +79,8 @@ form.addEventListener("submit", e => {
       li.innerHTML = markup;
       list.appendChild(li);
     })
-    .catch(() => {
+    .catch(() => 
+    {
       msg.textContent = "Please search for a valid city 😩";
     });
 
